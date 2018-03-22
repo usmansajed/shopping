@@ -1,0 +1,20 @@
+<%= nested_form_for @category, url: products_path, html: { multipart: true }, method: :post do |f| %>
+<h3>Categories</h3>
+<%= f.label :Category_name %>
+<%= f.text_field :name %>
+
+
+
+<!-- Fields for Products -->
+<div class="fields">
+    <%=f.fields_for :products do |prod|%>
+    <%= render 'form_for_products' ,f: prod%><br>     
+</div>
+
+<% end %>
+<%=f.link_to_add "Add Product" , :products%><br>
+<%=f.submit "save"%>
+    <%end%>
+
+
+    

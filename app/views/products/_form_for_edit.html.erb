@@ -1,0 +1,18 @@
+<div class="container"><%= nested_form_for @category, url: product_path, html: { multipart: true }, method: :patch do |f| %>
+<h3>Edit Categories and Products</h3>
+<%= f.label :Category_name %>
+<%= f.text_field :name %>
+
+
+
+<!-- Fields for Products -->
+<div class="fields">
+    <%=f.fields_for :products do |prod|%>
+    <%= render 'form_for_products' ,f: prod%><br>     
+</div>
+
+<% end %>
+<%=f.link_to_add "Add Products" , :products%><br><br>
+<%=f.submit "Update"%>
+    <%end%>
+</div>
