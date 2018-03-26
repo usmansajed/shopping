@@ -53,9 +53,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'hirb'
-gem 'hirb'
-gem 'hirb'
 gem 'cocoon'
 gem 'simple_form'
 gem 'nested_form'
@@ -65,3 +62,7 @@ gem 'jquery'
 gem 'bootstrap-sass'
 gem 'paperclip'
 gem 'devise'
+gem 'cancancan'
+gem 'rolify'
+
+

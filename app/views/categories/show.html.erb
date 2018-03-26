@@ -1,0 +1,51 @@
+<div class="container">
+<% if @category.products.present? %>
+<center><h3>Products of <%=@category.name%></h3></center><br>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Image</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+<%@category.products.each do |product|%><br>
+<tbody>
+<tr>
+<div class="row" > 
+  <div class="col-md-10" >                 
+      <td><h3><%=product.name%></h3></td>
+      <td><%=image_tag product.image.url(:thumb)%></td>
+      <td><h5><%= product.price%></h5></td>
+      <td><h5><%= product.description%></h5></td>
+  </div>
+   <div class="col-md-2">
+        <td>
+         <div class="pull-right">
+            <%= form_for (@order_item), remote: true do |f|%>
+            <%= product.price %>
+              <div class="form-group">
+                <%= f.hidden_field :product_id, value: product.id%>
+                <%= f.number_field :quantity, value: 1, min: 1, class: 'form-control' %>
+              </div>
+                  <%= f.submit "Add to Cart", class: "btn btn-success btn-sm form-control" %> </td>
+            <%end%>
+         </div>
+        </td>
+    </div>
+  </div>
+</div>
+
+  </div>
+  <%end%>
+</tr>
+</tbody>
+</table>
+<%else%>
+  <h5> No Product of this category</h5>
+<%end%>
+<br>
+<center><%= link_to "Back to Categories" , categories_path, class: "btn btn-success btn-lg" %></center>
