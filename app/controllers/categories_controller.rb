@@ -1,26 +1,21 @@
 class CategoriesController < ApplicationController
   before_action :is_admin, only: [:new, :edit, :update, :destroy]
 
-  def index
-  	
+  def index 	
   	@categories=Category.all
-
   end
-
   def new 
   		@category=Category.new
   		@category.products.build
   end
-
   def create
 
 	@category=Category.new(category_params)
 	 	respond_to do |format|
 			if @category.save
-	 			format.html { redirect_to new_category_path, :notice => 'New category has been created' }
+	 			format.html { redirect_to categories_path, :notice => 'New category has been created' }
 			else
 				format.html { redirect_to new_category_path, :notice => 'Please fill up all input Fields'}
-			# render "new",
 			end
 		end
   end
@@ -39,9 +34,8 @@ def edit
 end
 def update
 	@category=Category.find(params[:id])
-	if @category.update_attributes!(category_params)
-		redirect_to category_path
-		# :notice=> "Your friends have been updated"
+	if @category.update_attributes(category_params)
+		redirect_to categories_path
 	else 
 		render "form_for_edit"
 	end

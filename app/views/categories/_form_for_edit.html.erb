@@ -1,4 +1,4 @@
-<div class="container"><%= nested_form_for @category, url: product_path, html: { multipart: true }, method: :patch do |f| %>
+<div class="container"><%= nested_form_for @category, url:category_path, html: { multipart: true }, method: :patch do |f| %>
 <center><h3>Edit Categories and Products</h3></center>
 <div class="form-group">
 	<%= f.label :Category_name %>

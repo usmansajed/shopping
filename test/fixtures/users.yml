@@ -4,8 +4,16 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+admin_user: 
+	email: u@gem.com
+	password: MyString
+	role: 'admin'
+
 # column: value
 #
-two: {}
+regular_user: 
+	email: usman@gem.com
+	password_digest: MyString
+	role: 'user'
+
 # column: value

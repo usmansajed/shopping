@@ -5,11 +5,7 @@ class OrderItem < ApplicationRecord
 	before_save :set_total_price
 
 	def unit_price
-		if persisted?
-			self[:unit_price]
-		else
-			product.price
-		end
+			self[:unit_price]=product.price
 	end
 	def total_price
 		unit_price*quantity
