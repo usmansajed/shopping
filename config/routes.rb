@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # resources :admin do 
      # namespace :admin do
 	 resources :categories
+   resources :products
    resources :order_items
    resources :carts
 	 root to: 'categories#index'

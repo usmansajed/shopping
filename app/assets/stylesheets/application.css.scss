@@ -12,6 +12,9 @@
  *
  *= require_tree .
  *= require_self
+ *= require toastr
  */
+@import "toastr";
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "toastr";

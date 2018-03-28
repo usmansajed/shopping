@@ -2,21 +2,26 @@ class CategoriesController < ApplicationController
   before_action :is_admin, only: [:new, :edit, :update, :destroy]
 
   def index
-  	@category=Category.all
+  	
+  	@categories=Category.all
 
   end
 
-  def new
+  def new 
   		@category=Category.new
   		@category.products.build
   end
 
   def create
+
 	@category=Category.new(category_params)
-		if @category.save!
-	 		redirect_to new_category_path
-		else
-			render "new"
+	 	respond_to do |format|
+			if @category.save
+	 			format.html { redirect_to new_category_path, :notice => 'New category has been created' }
+			else
+				format.html { redirect_to new_category_path, :notice => 'Please fill up all input Fields'}
+			# render "new",
+			end
 		end
   end
 def destroy
