@@ -1,5 +1,8 @@
+<div class="container">
 <% if @order_items.size>0 %>
-
+  <center>
+  	<%=link_to "Check Out", carts_path, class: "btn btn-info"%>
+  </center><br>
 	<% @order_items.each do |item| %>
 		<div class="well">
 			<div class="row">
@@ -28,6 +31,4 @@
 	<% end %>
 <% else %>
 <% end %>
-<%=link_to "Check Out", carts_path%>
-<%= link_to "Back to Caregories", categories_path, class: "btn btn-success btn-lg col-md-12"%>
 </div>

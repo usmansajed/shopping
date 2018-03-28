@@ -64,5 +64,6 @@ gem 'paperclip'
 gem 'devise'
 gem 'cancancan'
 gem 'rolify'
+gem 'toastr-rails'
 
 

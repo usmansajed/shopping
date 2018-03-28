@@ -21,12 +21,19 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Shopping Center</a>
+            <a class="navbar-brand active" href="#" >Shopping Center</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><%= link_to "Home", root_path %></li>
-              
+              <li class="active">
+                <%= link_to "Categories", root_path %>
+              </li>
+              <li>
+                <%=link_to "Products" , products_path, class: "nav navbar-nav" %>
+              </li>
+              <li>
+                <%=link_to "Logout" , destroy_user_session_path, method: :delete, class: "nav navbar-nav" %>
+              </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="active cart"><%= render 'layouts/cart' %></li>
@@ -34,7 +41,24 @@
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
-      <%= yield %>
+     
   </body>
 </html>
+<% unless flash.empty? %>
+  <% msgs = [] %>
+  <% flash.each do |f| %>
+    <% msgs << [f[0].to_s.gsub('alert', 'error').gsub('notice', 'success'), f[1]] %>
+  <% end %>
+  
+  <script>
+    var msgs = #{raw(msgs)}
+    $(document).ready(toast(msgs));
+    function toast(msgs){
+      msgs.forEach(function(msg){
+        toastr[msg[0]](msg[1])
+      })
+    }
+  </script>
+<% end %>
+<%= yield %>
 

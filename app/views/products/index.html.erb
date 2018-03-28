@@ -1,34 +1,69 @@
 <div class="container">
-	<center><h1>Categories</h1></center>
-<div class="row">
-	<div class="col-md-12 btn btn-success">
-		<center><%= link_to 'Create New Category' ,new_product_path%></center>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-3">
-		<h3>Names</h3>
-	</div>
-</div>
-<div class="row">
-<% @category.each do |category| %>	
-	<div class="col-md-6">
-		<%= link_to category.name ,product_path(category)%>
-	</div>
-    <div class="col-md-3">
-    	<%= link_to 'Delete' ,product_path(category), :method=>:delete%></td>
+<% if @product.present? %>
+<center><h3>All Products</h3></center><br>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Image</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+<%@product.each do |product|%><br>
+<tbody>
+<tr>
+<div class="row" > 
+  <div class="col-md-10" >                 
+      <td>
+        <h3>
+          <%=product.name%>
+        </h3>
+      </td>
+      <td>
+        <%=image_tag product.image.url(:thumb)%>
+      </td>
+      <td>
+        <h5>
+          <%= product.price%>
+        </h5>
+      </td>
+      <td>
+        <h5>
+          <%= product.description%>
+        </h5>
+      </td>
+      <%if has_role?(:admin)%>
+        <td>
+          <%=link_to "Delete", product_path(product), method: :delete%>
+        </td>
+      <%end%>
+  </div>
+   <div class="col-md-2">
+        <td>
+         <div class="pull-right">
+            <%= form_for (@order_item), remote: true do |f|%>
+            <%= product.price %>
+              <div class="form-group">
+                <%= f.hidden_field :product_id, value: product.id%>
+                <%= f.number_field :quantity, value: 1, min: 1, class: 'form-control' %>
+              </div>
+                  <%= f.submit "Add to Cart", class: "btn btn-success btn-sm form-control" %> </td>
+            <%end%>
+         </div>
+        </td>
     </div>
-    <div class="col-md-3">
-		<%= link_to 'Edit' ,edit_product_path(category)%>
-	</div>	
-	<%end%>
+  </div>
 </div>
-<br>
-<div class="row">
-	<div class="col-md-12 btn btn-success">
-		<%= link_to 'Back' ,new_product_path%>	
-	</div>
-</div>
-<%=link_to "Logout" , destroy_user_session_path, method: :delete %><br>
 
-</div>
+  </div>
+  <%end%>
+</tr>
+</tbody>
+</table>
+<%else%>
+  <h5> No Product of this category</h5>
+<%end%>
+

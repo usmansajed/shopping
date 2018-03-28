@@ -1,42 +1,51 @@
-<section class="bgg">
-<div class="container ">
+<div class="container">
 	<%if has_role?(:admin)%>
-<div class="row">
-	<div class="col-md-12 btn btn-success">
-		<center><%= link_to 'Create New Category' ,new_category_path%></center>
-	</div>
-</div>
-<%end%>
-		<center><h3>List of Categories</h3></center>
-<% @category.each do |category| %>	
+    <center><%= link_to 'Create New Category' ,new_category_path%></center>
+  <%end%>
+		<center>
+      <h3>
+        All Categories
+      </h3>
+    </center>
+
 	<table class="table">
-    	    <tr>
-        		<th>Name</th>
-        		<th></th>
-        		<th></th>
-      		</tr>
-    	<tbody>
+    <thead>
+    	<tr>
+          <th>Name</th>
+        	<th></th>
+        	<th></th>
+          <th></th>
+      </tr>
+    </thead>
+    <tbody>
+<% @categories.each do |category| %>
+
       		<tr>
-        		<td><%= link_to category.name ,category_path(category)%></td>
+        		<td>
+              <%= link_to category.name ,category_path(category)%>
+            </td>
         		<%if has_role?(:admin)%>
-        		<td><%= link_to 'Delete' ,category_path(category), :method=>:delete%></td>
+        		  <td>
+                <%= link_to 'Delete' ,category_path(category), :method=>:delete%>
+              </td>
         		<%end%>
         		<%if has_role?(:admin)%>
-        		<td><%= link_to 'Edit' ,edit_category_path(category)%></td>
+        		  <td>
+                <%= link_to 'Edit' ,edit_category_path(category)%>
+              </td>
         		<%end%>
+            <%if has_role?(:admin)%>
+              <td>
+                 <%= link_to "Add Product", {:controller => "products", :action => "new", :id => category.id }%>
+              </td>
+            <%end%>
       		</tr>
+
     	</tbody>
+<%end%>
   </table>
-<%end%>
-<br>
-<%if has_role?(:admin)%>
-<div class="row">
-	<div class="col-md-12 btn btn-success">
-		<%= link_to 'Back' ,new_category_path%>	
-	</div>
-</div><br><br>
-<%end%>
-<center><%=link_to "Logout" , destroy_user_session_path, method: :delete, class: "btn btn-lg btn-danger" %></center>
-</section>
+</div>
+
+
 
 

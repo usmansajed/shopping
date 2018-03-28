@@ -1,25 +1,41 @@
 <% if @checkout_items.size>0 %>
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Unit price</th>
+                    <th>Quantity</th>
+                    <th>Total price</th>
+                </tr>
+            </thead>
 	<% @checkout_items.each do |check| %>
-		<table class="table table-responsive">
-    		<thead>
-      			<tr>
-        			<th>Name</th>
-        			<th>Unit price</th>
-        			<th>Quantity</th>
-        			<th>Total price</th>
-      			</tr>
-    		</thead>
     		<tbody>
     			<tr>
-                    <td><%= check.product.name%></td>
-        			<td><%=check.unit_price%></td>
-        			<td><%= check.quantity%></td>
-        			<td><%= check.total_price %></td>
+                    <td>
+                        <%= check.product.name%>
+                    </td>
+        			<td>
+                        <%=check.unit_price%>
+                    </td>
+        			<td>
+                        <%= check.quantity%>
+                    </td>
+        			<td>
+                        <%= check.total_price %>
+                    </td>
       			</tr>
     		</tbody>
-    	</table>
     <% end %>
-<center><h2>Grand Total: <%= current_order.subtotal %></h2></center>
+    	</table>
+<center>
+    <h2 style="background-color: grey; color-">
+        Grand Total: <%= current_order.subtotal %>
+    </h2>
+</center>
 <% else %>
-<center><h2>Nothing To check out for</h2></center>
+<center>
+    <h2>
+        Nothing To check out for
+    </h2>
+</center>
 <% end %>
